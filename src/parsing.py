@@ -1,9 +1,9 @@
 import csv
 
-class AvgGdpReport:
+class AvgGdpData:
 
     @staticmethod
-    def _parse_file(file:str)->dict[str,list[int]]:
+    def _parse_csv_file(file:str)->dict[str,list[int]]:
         """
         Принимает путь к файлу и возвращает словарь вида:
         \t{'Страна': ['Сколько раз встретили страну', 'Cумма gdp'] }
@@ -35,11 +35,14 @@ class AvgGdpReport:
             return {}
 
     @classmethod
-    def avg_gdp_list(self, files:list[str])->list[str,int]:
+    def avg_gdp_list(self, files:list[str])->list[list[str,int]]:
+        '''
+        Возвращает отсортированный список стран по среднему gdp 
+        '''
         result = {}
         for file in files:
 
-            data = self._parse_file(file)
+            data = self._parse_csv_file(file)
             if not data:
                 continue
         

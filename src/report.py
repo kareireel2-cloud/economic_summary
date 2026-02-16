@@ -1,18 +1,15 @@
-from src.parsing import AvgGdpReport
+from src.parsing import AvgGdpData
 from tabulate import tabulate
 
-class Utility:    
-    @staticmethod
-    def print_report(data:list, headers:list[str]):
-        # headers - название колонок для отчёта
-        print(tabulate(data, headers=headers,tablefmt='grid'))
-
+def _print_report(data:list, headers:list[str]):
+        print(tabulate(data, headers=headers,tablefmt='grid'))    
+            
 class EconomicReport:
+    # В этом классе можно дополнять логику для других видов отчётов.    
     def __init__(self,files):
         self.files = files
 
-    # В этом классе можно дополнять логику для других видов отчётов.
     def average_gdp(self):  
-        data = AvgGdpReport.avg_gdp_list(files=self.files)
+        data = AvgGdpData.avg_gdp_list(files=self.files)
         headers = ['country','gdp']
-        Utility.print_report(data=data,headers=headers)
+        _print_report(data=data, headers=headers)
